@@ -10,3 +10,4 @@
 *.tfvars
 __backend__.tf
 .nullstone/active-workspace.yml
+*.tar.gz
