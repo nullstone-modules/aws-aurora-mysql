@@ -1,0 +1,13 @@
+org_name: nullstone
+name: aws-aurora-mysql
+friendly_name: Aurora MySQL Cluster
+description: Produces a standard, best-practice Aurora MySQL cluster in AWS
+category: datastore
+subcategory: ""
+provider_types:
+    - aws
+platform: mysql
+subplatform: aurora
+type: ""
+appCategories: []
+is_public: true
