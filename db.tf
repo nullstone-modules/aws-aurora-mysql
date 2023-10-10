@@ -5,9 +5,6 @@ resource "aws_rds_cluster" "this" {
   engine_mode                 = "provisioned"
   engine_version              = var.mysql_version
   allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = true
-  instance_class              = var.instance_class
-  multi_az                    = var.high_availability
   allocated_storage           = var.allocated_storage
   storage_encrypted           = true
   storage_type                = "gp2"
@@ -16,8 +13,8 @@ resource "aws_rds_cluster" "this" {
   tags                        = local.tags
 
   iam_database_authentication_enabled = true
-  master_username                            = replace(data.ns_workspace.this.block_ref, "-", "_")
-  master_password                            = random_password.this.result
+  master_username                     = replace(data.ns_workspace.this.block_ref, "-", "_")
+  master_password                     = random_password.this.result
 
   apply_immediately = true
 
@@ -27,11 +24,9 @@ resource "aws_rds_cluster" "this" {
   final_snapshot_identifier = "${local.resource_name}-${replace(timestamp(), ":", "-")}"
 
   backup_retention_period = var.backup_retention_period
-  backup_window           = "02:00-03:00"
+  preferred_backup_window = "02:00-03:00"
 
   enabled_cloudwatch_logs_exports = ["mysql", "upgrade"]
-  monitoring_interval             = 5
-  monitoring_role_arn             = aws_iam_role.monitoring.arn
 
   lifecycle {
     ignore_changes = [master_username, final_snapshot_identifier]

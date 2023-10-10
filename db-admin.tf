@@ -1,5 +1,5 @@
 module "db_admin" {
-  source  = "api.nullstone.io/nullstone/aws-mysql-db-admin/aws"
+  source = "api.nullstone.io/nullstone/aws-mysql-db-admin/aws"
 
   name     = local.resource_name
   tags     = local.tags
