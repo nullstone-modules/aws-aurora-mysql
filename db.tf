@@ -5,7 +5,6 @@ resource "aws_rds_cluster" "this" {
   engine_mode                 = "provisioned"
   engine_version              = var.mysql_version
   allow_major_version_upgrade = true
-  allocated_storage           = var.allocated_storage
   storage_encrypted           = true
   storage_type                = "gp2"
   port                        = local.port
