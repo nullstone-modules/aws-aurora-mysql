@@ -26,7 +26,7 @@ resource "aws_rds_cluster" "this" {
   backup_retention_period = var.backup_retention_period
   preferred_backup_window = "02:00-03:00"
 
-  enabled_cloudwatch_logs_exports = ["mysql", "upgrade"]
+  enabled_cloudwatch_logs_exports = ["slowquery", "error", "upgrade"]
 
   lifecycle {
     ignore_changes = [master_username, final_snapshot_identifier]
