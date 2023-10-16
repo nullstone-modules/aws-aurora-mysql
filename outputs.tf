@@ -14,7 +14,7 @@ output "db_master_secret_name" {
 }
 
 output "db_endpoint" {
-  value       = aws_rds_cluster.this.endpoint
+  value       = "${aws_rds_cluster.this.endpoint}:${local.port}"
   description = "string ||| The endpoint URL to access the MySQL instance."
 }
 
