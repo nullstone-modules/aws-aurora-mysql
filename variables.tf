@@ -8,7 +8,7 @@ EOF
 
 variable "instance_class" {
   type        = string
-  default     = "db.t3.micro"
+  default     = "db.t3.medium"
   description = <<EOF
 The instance class to use for each instance. Valid values can be found here and are based on a combination of variables.
 https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
