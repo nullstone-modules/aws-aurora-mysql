@@ -1,3 +1,12 @@
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = var.instance_count
+  identifier         = "${local.resource_name}-instance-${count.index}"
+  cluster_identifier = aws_rds_cluster.this.id
+  instance_class     = var.instance_class
+  engine             = aws_rds_cluster.this.engine
+  engine_version     = aws_rds_cluster.this.engine_version
+}
+
 resource "aws_rds_cluster" "this" {
   cluster_identifier          = local.resource_name
   db_subnet_group_name        = aws_db_subnet_group.this.name
