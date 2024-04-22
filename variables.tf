@@ -2,7 +2,7 @@ variable "mysql_version" {
   type        = string
   default     = "8.0"
   description = <<EOF
-The MySQL engine version to use. Valid values are 5.6, 5.7, and 8.0.
+The MySQL engine version to use. The most common values are 5.6, 5.7, and 8.0. You can also provide a specific version number, such as 8.0.mysql_aurora.3.06.0 if needed.
 EOF
 }
 
