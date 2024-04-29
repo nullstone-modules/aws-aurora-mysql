@@ -1,6 +1,6 @@
 locals {
   // Can only contain alphanumeric and hyphen characters
-  param_group_name = "${local.resource_name}-mysql${replace(var.mysql_version, ".", "-")}"
+  param_group_name = "${local.resource_name}-mysql${replace(replace(var.mysql_version, ".", "-"), "_", "-")}"
 }
 
 
