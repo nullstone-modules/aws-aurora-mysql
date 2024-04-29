@@ -10,16 +10,17 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 }
 
 resource "aws_rds_cluster" "this" {
-  cluster_identifier          = local.resource_name
-  db_subnet_group_name        = aws_db_subnet_group.this.name
-  engine                      = "aurora-mysql"
-  engine_mode                 = "provisioned"
-  engine_version              = var.mysql_version
-  allow_major_version_upgrade = true
-  storage_encrypted           = true
-  port                        = local.port
-  vpc_security_group_ids      = [aws_security_group.this.id]
-  tags                        = local.tags
+  cluster_identifier              = local.resource_name
+  db_subnet_group_name            = aws_db_subnet_group.this.name
+  engine                          = "aurora-mysql"
+  engine_mode                     = "provisioned"
+  engine_version                  = var.mysql_version
+  db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.this.name
+  allow_major_version_upgrade     = true
+  storage_encrypted               = true
+  port                            = local.port
+  vpc_security_group_ids          = [aws_security_group.this.id]
+  tags                            = local.tags
 
   iam_database_authentication_enabled = true
   master_username                     = replace(data.ns_workspace.this.block_ref, "-", "_")
@@ -84,4 +85,16 @@ data "aws_iam_policy_document" "monitoring_assume" {
 resource "aws_iam_role_policy_attachment" "monitoring" {
   role       = aws_iam_role.monitoring.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+resource "aws_rds_cluster_parameter_group" "this" {
+  name        = local.resource_name
+  family      = "aurora-mysql${var.mysql_version}"
+  tags        = local.tags
+  description = "Aurora MySQL for ${local.block_name} (${local.env_name})"
+
+  parameter {
+    name  = "performance_schema"
+    value = 0
+  }
 }
