@@ -1,12 +1,12 @@
 locals {
+  root_version = join(".", slice(split(".", var.mysql_version), 0, 2))
   // Can only contain alphanumeric and hyphen characters
-  param_group_name = "${local.resource_name}-mysql${replace(replace(var.mysql_version, ".", "-"), "_", "-")}"
+  param_group_name = "${local.resource_name}-mysql${replace(replace(local.root_version, ".", "-"), "_", "-")}"
 }
-
 
 resource "aws_rds_cluster_parameter_group" "this" {
   name_prefix = local.param_group_name
-  family      = "aurora-mysql${var.mysql_version}"
+  family      = "aurora-mysql${local.root_version}"
   tags        = local.tags
   description = "Aurora MySQL for ${local.block_name} (${local.env_name})"
 
