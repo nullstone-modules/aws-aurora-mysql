@@ -5,6 +5,8 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = var.instance_class
   engine             = aws_rds_cluster.this.engine
   engine_version     = aws_rds_cluster.this.engine_version
+
+  performance_insights_enabled = true
 }
 
 resource "aws_rds_cluster" "this" {
