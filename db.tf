@@ -6,7 +6,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   engine             = aws_rds_cluster.this.engine
   engine_version     = aws_rds_cluster.this.engine_version
 
-  performance_insights_enabled = true
+  performance_insights_enabled = var.enable_performance_insights
 }
 
 resource "aws_rds_cluster" "this" {
@@ -85,16 +85,4 @@ data "aws_iam_policy_document" "monitoring_assume" {
 resource "aws_iam_role_policy_attachment" "monitoring" {
   role       = aws_iam_role.monitoring.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
-}
-
-resource "aws_rds_cluster_parameter_group" "this" {
-  name        = local.resource_name
-  family      = "aurora-mysql${var.mysql_version}"
-  tags        = local.tags
-  description = "Aurora MySQL for ${local.block_name} (${local.env_name})"
-
-  parameter {
-    name  = "performance_schema"
-    value = 0
-  }
 }

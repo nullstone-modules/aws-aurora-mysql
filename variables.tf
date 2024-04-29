@@ -27,6 +27,21 @@ variable "backup_retention_period" {
   description = "The number of days that each backup is retained"
 }
 
+variable "enable_performance_insights" {
+  type        = bool
+  default     = false
+  description = "Enable performance insights"
+}
+
+variable "custom_mysql_params" {
+  type        = map(string)
+  default     = {}
+  description = <<EOF
+This is a dictionary of parameters to custom-configure the MySQL postgres instance.
+For a list of parameters, see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Parameters.html
+EOF
+}
+
 locals {
   port = 3306
 }
