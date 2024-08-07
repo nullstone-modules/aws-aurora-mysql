@@ -1,3 +1,7 @@
+locals {
+  ca_cert_identifier = "rds-ca-rsa2048-g1"
+}
+
 resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = var.instance_count
   identifier         = "${local.resource_name}-instance-${count.index}"
@@ -5,6 +9,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = var.instance_class
   engine             = aws_rds_cluster.this.engine
   engine_version     = aws_rds_cluster.this.engine_version
+  ca_cert_identifier = local.ca_cert_identifier
 
   performance_insights_enabled = var.enable_performance_insights
 }
