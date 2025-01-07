@@ -1,5 +1,18 @@
 locals {
   ca_cert_identifier = "rds-ca-rsa2048-g1"
+  // Limitations on master username: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints
+  invalid_usernames = [
+    "rdsadmin",
+    "admin",
+    "root",
+    "mysql",
+    "test",
+    "sys",
+  ]
+  master_username_fallback = "mysql_nullstone"
+  prelim_master_username   = replace(data.ns_workspace.this.block_ref, "-", "_")
+
+  master_username = contains(local.invalid_usernames, local.prelim_master_username) ? local.master_username_fallback : local.prelim_master_username
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -28,7 +41,7 @@ resource "aws_rds_cluster" "this" {
   tags                            = local.tags
 
   iam_database_authentication_enabled = true
-  master_username                     = replace(data.ns_workspace.this.block_ref, "-", "_")
+  master_username                     = local.master_username
   master_password                     = random_password.this.result
 
   apply_immediately = true
