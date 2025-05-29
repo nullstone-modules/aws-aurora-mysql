@@ -13,6 +13,16 @@ output "db_master_secret_name" {
   description = "string ||| The name of the secret in AWS Secrets Manager containing the password"
 }
 
+output "db_hostname" {
+  value       = aws_rds_cluster.this.endpoint
+  description = "string ||| The hostname of the mysql instance."
+}
+
+output "db_port" {
+  value       = aws_rds_cluster.this.port
+  description = "number ||| The port of the mysql instance."
+}
+
 output "db_endpoint" {
   value       = "${aws_rds_cluster.this.endpoint}:${local.port}"
   description = "string ||| The endpoint URL to access the MySQL instance."
