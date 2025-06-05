@@ -16,15 +16,22 @@ locals {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = var.instance_count
-  identifier         = "${local.resource_name}-instance-${count.index}"
-  cluster_identifier = aws_rds_cluster.this.id
-  instance_class     = var.instance_class
-  engine             = aws_rds_cluster.this.engine
-  engine_version     = aws_rds_cluster.this.engine_version
-  ca_cert_identifier = local.ca_cert_identifier
+  count                        = var.instance_count
+  identifier                   = "${local.resource_name}-instance-${count.index}"
+  cluster_identifier           = aws_rds_cluster.this.id
+  instance_class               = var.instance_class
+  engine                       = aws_rds_cluster.this.engine
+  engine_version               = aws_rds_cluster.this.engine_version
+  auto_minor_version_upgrade   = var.auto_upgrade_minor
+  preferred_maintenance_window = var.maintenance_window
+  ca_cert_identifier           = local.ca_cert_identifier
+
+  copy_tags_to_snapshot = true
+  tags                  = local.tags
 
   performance_insights_enabled = var.enable_performance_insights
+
+  apply_immediately = true
 }
 
 resource "aws_rds_cluster" "this" {
@@ -35,6 +42,7 @@ resource "aws_rds_cluster" "this" {
   engine_version                  = var.mysql_version
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.this.name
   allow_major_version_upgrade     = true
+  preferred_maintenance_window    = var.maintenance_window
   storage_encrypted               = true
   port                            = local.port
   vpc_security_group_ids          = [aws_security_group.this.id]
