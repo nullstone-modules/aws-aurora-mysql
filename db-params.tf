@@ -20,8 +20,20 @@ resource "aws_rds_cluster_parameter_group" "this" {
     for_each = var.custom_mysql_params
 
     content {
-      name  = parameter.key
-      value = parameter.value
+      name         = parameter.key
+      value        = parameter.value
+      apply_method = contains(local.static_params, parameter.key) ? "pending-reboot" : "immediate"
     }
   }
+}
+
+locals {
+  static_params = [
+    "aurora_enhanced_binlog",
+    "binlog_backup",
+    "binlog-do-db",
+    "binlog_format",
+    "binlog-ignore-db",
+    "binlog_replication_globaldb",
+  ]
 }
