@@ -63,6 +63,12 @@ See [RDS Maintenance Window docs](https://docs.aws.amazon.com/AmazonRDS/latest/U
 EOF
 }
 
+variable "allow_private_access" {
+  type        = bool
+  default     = false
+  description = "Allow private access from any device in the VPC"
+}
+
 locals {
   port = 3306
 }
