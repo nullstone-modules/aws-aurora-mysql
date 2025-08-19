@@ -30,9 +30,10 @@ resource "random_password" "this" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name       = "${local.resource_name}/master"
-  tags       = local.tags
-  kms_key_id = aws_kms_key.this.id
+  name                    = "${local.resource_name}/master"
+  tags                    = local.tags
+  kms_key_id              = aws_kms_key.this.id
+  recovery_window_in_days = local.is_prod_env ? 7 : 0
 }
 
 resource "aws_secretsmanager_secret_version" "password" {

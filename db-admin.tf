@@ -1,11 +1,12 @@
 module "db_admin" {
   source = "api.nullstone.io/nullstone/aws-mysql-db-admin/aws"
 
-  name     = local.resource_name
-  tags     = local.tags
-  host     = aws_rds_cluster.this.endpoint
-  username = aws_rds_cluster.this.master_username
-  password = random_password.this.result
+  name        = local.resource_name
+  tags        = local.tags
+  host        = aws_rds_cluster.this.endpoint
+  username    = aws_rds_cluster.this.master_username
+  password    = random_password.this.result
+  is_prod_env = local.is_prod_env
 
   network = {
     vpc_id                  = local.vpc_id
