@@ -1,3 +1,6 @@
+# 0.1.3 (Aug 19, 2025)
+* Disable secret recovery on admin password when not in a production environment.
+
 # 0.1.2 (Jun 12, 2025)
 * Added `var.allow_private_access` to allow private network access to the cluster from anywhere in the VPC.
 
