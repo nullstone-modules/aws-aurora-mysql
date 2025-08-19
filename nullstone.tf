@@ -10,6 +10,7 @@ terraform {
 }
 
 data "ns_workspace" "this" {}
+data "ns_env" "this" {}
 
 // Generate a random suffix to ensure uniqueness of resources
 resource "random_string" "resource_suffix" {
@@ -24,4 +25,5 @@ locals {
   tags          = data.ns_workspace.this.tags
   block_name    = data.ns_workspace.this.block_name
   resource_name = "${data.ns_workspace.this.block_ref}-${random_string.resource_suffix.result}"
+  is_prod_env   = data.ns_env.this.is_prod
 }
