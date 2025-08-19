@@ -32,6 +32,10 @@ provider "registry.terraform.io/hashicorp/random" {
   version = "3.7.2"
   hashes = [
     "h1:0hcNr59VEJbhZYwuDE/ysmyTS0evkfcLarlni+zATPM=",
+    "h1:356j/3XnXEKr9nyicLUufzoF4Yr6hRy481KIxRVpK0c=",
+    "h1:KG4NuIBl1mRWU0KD/BGfCi1YN/j3F7H4YgeeM7iSdNs=",
+    "h1:Lmv2TxyKKm9Vt4uxcPZHw1uf0Ax/yYizJlilbLSZN8E=",
+    "h1:hkKSY5xI4R1H4Yrg10HHbtOoxZif2dXa9HFPSbaVg5o=",
     "zh:14829603a32e4bc4d05062f059e545a91e27ff033756b48afbae6b3c835f508f",
     "zh:1527fb07d9fea400d70e9e6eb4a2b918d5060d604749b6f1c361518e7da546dc",
     "zh:1e86bcd7ebec85ba336b423ba1db046aeaa3c0e5f921039b3f1a6fc2f978feab",
@@ -50,7 +54,11 @@ provider "registry.terraform.io/hashicorp/random" {
 provider "registry.terraform.io/nullstone-io/ns" {
   version = "0.7.0"
   hashes = [
+    "h1:5BtUtojKGyc9lTq7Mmd5Va53b8sgLbK+vFuVRLy2v9s=",
+    "h1:5Qt0YSCZ46a1HgW284Yoj54EY68cZ1Gk3vVpBpvlNMY=",
     "h1:RN1sdfnqtprye/jOqvFrO49j/HX4ZEjiG35PC7pEVB8=",
+    "h1:SAMPAdwNmdaA9GScOAGF+qjWwJkeroFImguOxvcNzQs=",
+    "h1:tkL9VHk+zLOIj4gm4TPzctnA4nWjSRuD+URliYQPqbc=",
     "zh:1b1a2a63fb533c6b679bab2bfd9d02cd4fabbe3102c7fedd470f8f82be626acd",
     "zh:2d9d8adb26b1ba0448e184849b632fef4dc208bd95abdf61e51de87fecd91211",
     "zh:2f8558c2dd24ea2a9b27ccbe540877e7b65c98d6e83dc74c64a4cfa764ead6e6",
